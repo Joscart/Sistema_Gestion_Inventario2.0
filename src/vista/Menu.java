@@ -6,8 +6,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import controlador.logic_Menu;
-
 import java.awt.FlowLayout;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
@@ -39,7 +37,7 @@ public class Menu extends JFrame {
 			public void run() {
 				try {
 					Menu frame = new Menu();
-					//frame.setVisible(true);
+					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -78,13 +76,6 @@ public class Menu extends JFrame {
 		btn_salir = new JButton("Salir");
 		contentPane.add(btn_salir, "cell 6 7,alignx right,aligny bottom");
 		
-		logic_Menu logica = new logic_Menu(this);
-	}
-	private ImageIcon imagen = new ImageIcon("Datos/Recursos/floppa.gif");
-
-	public void paint(Graphics g) {
-		g.drawImage(imagen.getImage(), 0, 0, getWidth(), getHeight(), this);
-		contentPane.paintComponents(contentPane.getGraphics());
 	}
 
 }

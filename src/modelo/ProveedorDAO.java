@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
-import controlador.logic_Menu.VENTANA_TIPO;
+import controlador.SesionActual.VENTANA_TIPO;
 import libreria.Files;
 
 public class ProveedorDAO implements Config{
@@ -21,8 +21,9 @@ public class ProveedorDAO implements Config{
 	}
 
 	public boolean agregarProveedor(Proveedor p) throws IOException {
+		if(p == null) return false;
 		file.setFile(new File(RUTA_ESPECIFICA, ARCHIVO_PROVEEDOR));
-		return file.writerFile(p.information(), false);
+		return file.writerFile(p.toFile(), false);
 	}
 
 	public boolean modificarDB(List<? extends Proveedor> list) throws IOException {
@@ -50,8 +51,9 @@ public class ProveedorDAO implements Config{
 		String texto = file.readerFile();
 		for (String linea : texto.split("\n")) {
 			if(linea.isEmpty()) continue;
-			String[] datos = linea.split(";");
-			list.add(new Proveedor(datos[0], datos[1], datos[2], datos[3], datos[4], datos[5]));
+			Proveedor aux = new Proveedor();
+			if(!aux.fromFile(linea)) continue;
+			list.add(aux);
 		}
 		return list;
 	}

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
-import controlador.logic_Menu.VENTANA_TIPO;
+import controlador.SesionActual.VENTANA_TIPO;
 import libreria.Files;
 
 public class ProductoDAO implements Config{
@@ -21,8 +21,9 @@ public class ProductoDAO implements Config{
 	}
 
 	public boolean agregarProducto(Producto p) throws IOException {
+		if(p == null) return false;
 		file.setFile(new File(RUTA_ESPECIFICA, ARCHIVO_PRODUCTO));
-		return file.writerFile(p.information(), false);
+		return file.writerFile(p.toFile(), false);
 	}
 
 	public boolean modificarDB(List<? extends Producto> list) throws IOException {
@@ -50,8 +51,9 @@ public class ProductoDAO implements Config{
 		String texto = file.readerFile();
 		for (String linea : texto.split("\n")) {
 			if(linea.isEmpty()) continue;
-			String[] datos = linea.split(";");
-			list.add(new Producto(datos[0], datos[1], datos[2], Double.parseDouble(datos[3]), Integer.parseInt(datos[4]), new Proveedor(datos[5], datos[6], datos[7], datos[8], datos[9], datos[10])));
+			Producto aux = new Producto();
+			if(!aux.fromFile(linea)) continue;
+			list.add(aux);
 		}
 		return list;
 	}

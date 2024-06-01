@@ -47,7 +47,7 @@ public class Formulario extends JFrame {
 			public void run() {
 				try {
 					Formulario frame = new Formulario();
-					//frame.setVisible(true);
+					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

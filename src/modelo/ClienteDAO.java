@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
-import controlador.logic_Menu.VENTANA_TIPO;
+import controlador.SesionActual.VENTANA_TIPO;
 import libreria.Files;
 import modelo.Usuario.TIPO_USUARIO;
 
@@ -22,8 +22,9 @@ public class ClienteDAO implements Config{
 	}
 	
 	public boolean agregarUsuario(Cliente c) throws IOException{
+		if(c == null) return false;
 		file.setFile(new File(RUTA_ESPECIFICA,ARCHIVO_USUARIO));
-		return file.writerFile(c.information(), false);
+		return file.writerFile(c.toFile(), false);
 	}
 	
 	public synchronized boolean modificarDB(List<? extends Cliente> list) throws IOException {	
@@ -51,13 +52,14 @@ public class ClienteDAO implements Config{
 		String texto = file.readerFile();
 		for (String linea : texto.split("\n")) {
 			if(linea.isEmpty()) continue;
-			String[] datos = linea.split(";");
-			Cliente aux = switch (datos[5]) {
-			case "0" -> new Cliente(datos[0], datos[1], datos[2], datos[3], datos[4]);
-			case "1" -> new Empleado(datos[0], datos[1], datos[2], datos[3], datos[4]);
-			case "2" -> new Administrador(datos[0], datos[1], datos[2], datos[3], datos[4]);
-			default -> throw new IllegalArgumentException("Unexpected value: " + datos[5]);
-			};
+			Cliente aux = new Cliente();
+			if(!aux.fromFile(linea)) {
+				aux = new Empleado();
+				if (!aux.fromFile(linea)) {
+					aux = new Administrador();
+					if (!aux.fromFile(linea)) continue;
+				}
+			}
 			list.add(aux);
 		}
 		return list;

@@ -1,82 +1,91 @@
 package controlador;
 
-import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.util.List;
 
 import javax.swing.JOptionPane;
 
-import controlador.logic_Menu.VENTANA_TIPO;
+import controlador.SesionActual.VENTANA_TIPO;
 import modelo.Administrador;
 import modelo.Cliente;
 import modelo.Empleado;
 import modelo.Producto;
 import modelo.Proveedor;
 import modelo.ValidarDatosCliente;
-import modelo.ValidarDatosProveedor;
 import modelo.ValidarDatosProducto;
+import modelo.ValidarDatosProveedor;
 import vista.Formulario;
 
-public class logic_Formulario implements ActionListener, KeyListener, WindowListener{
+public class logic_Formulario implements ActionListener, KeyListener{
 
 	private Formulario lb;
-	private boolean guardado = true;
-
 	private List<Proveedor> proveedores;
-
+	private boolean guardado = true;
 
 	private Cliente tm_usuario;
 	private Proveedor tm_proveedor;
 	private Producto tm_producto;
 
-	VENTANA_TIPO tipo;
+	private VENTANA_TIPO tipo;
 
 	public logic_Formulario(Formulario lb) {
 		this.lb = lb;
-		lb.setVisible(true);
-		lb.setDefaultCloseOperation(Formulario.HIDE_ON_CLOSE);
-		lb.setVisible(false);
 		listener();
 	}
 
+	private void listener() {
+		lb.btn_guardar.addActionListener(this);
+	}
+	
 	public VENTANA_TIPO getTipo() {
 		return tipo;
 	}
 
-	public boolean setTipo(VENTANA_TIPO tipo, Rectangle... btn) {
-		if (!guardado) {
-			if (!confirmarSalida()) {
-				lb.setVisible(true);				
-				return false;
-			} else {
-			}
-		}
-
+	public boolean setTipo(VENTANA_TIPO tipo) {
 		this.tipo = tipo;
 		guardado = true;
-		if (btn.length > 0)
-			lb.setBounds(btn[0]);
 		cargarFormulario();
-		lb.setVisible(true);
 		return true;
 	}
-
-	private void listener() {
-		lb.txt_entrada1.addKeyListener(this);
-		lb.txt_entrada2.addKeyListener(this);
-		lb.txt_entrada3.addKeyListener(this);
-		lb.txt_entrada4.addKeyListener(this);
-		lb.txt_entrada5.addKeyListener(this);
-		lb.txt_entrada6.addKeyListener(this);
-		lb.cbx_entrada7.addActionListener(this);
-		lb.btn_agregar.addActionListener(this);
-		lb.btn_guardar.addActionListener(this);
-		lb.addWindowListener(this);
+	
+	public void setProveedores(List<Proveedor> proveedores) {
+		this.proveedores = proveedores;
+	}
+	
+	public void setCliente(Cliente cliente) {
+		this.tm_usuario = cliente;
+	}
+	
+	public Cliente getCliente() {
+		return tm_usuario;
+	}
+	
+	public void setProveedor(Proveedor proveedor) {
+		this.tm_proveedor = proveedor;
+	}
+	
+	public Proveedor getProveedor() {
+		return tm_proveedor;
+	}
+	
+	public void setProducto(Producto producto) {
+		this.tm_producto = producto;
+	}
+	
+	public Producto getProducto() {
+		return tm_producto;
+	}
+	
+	public void setGuardado(boolean guardado) {
+		this.guardado = guardado;
+	}
+	
+	public boolean isGuardado() {
+		return guardado;
 	}
 
 	private void reset() {
@@ -125,14 +134,6 @@ public class logic_Formulario implements ActionListener, KeyListener, WindowList
 		lb.txt_entrada6.setEnabled(true);
 		lb.cbx_entrada7.setEnabled(true);
 		lb.txt_informacion.setEditable(false);
-	}
-
-	private boolean confirmarSalida() {
-		if (JOptionPane.showConfirmDialog(lb, "¿Desea salir sin guardar?", "Confirmar Salida",
-				JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-			return true;
-		}
-		return false;
 	}
 
 	public void cargarFormulario() {
@@ -185,6 +186,20 @@ public class logic_Formulario implements ActionListener, KeyListener, WindowList
 			lb.txt_informacion.setVisible(false);
 			lb.btn_agregar.setVisible(false);
 			lb.btn_guardar.setText("Guardar");
+			
+			if (tm_proveedor != null) {
+				lb.txt_entrada1.setText(tm_proveedor.getNombreCompleto());
+				lb.txt_entrada2.setText(tm_proveedor.getEmail());
+				lb.txt_entrada3.setText(tm_proveedor.getDni());
+				lb.txt_entrada4.setText(tm_proveedor.getCodigo());
+				lb.txt_entrada5.setText(tm_proveedor.getTelefono());
+				lb.txt_entrada6.setText(tm_proveedor.getRazonSocial());
+				if (tm_proveedor.getRazonSocial() == null) {
+					lb.cbx_entrada7.setSelectedIndex(0);
+				} else {
+					lb.cbx_entrada7.setSelectedIndex(1);
+				}
+			}
 			break;
 		case PRODUCTO:
 			lb.setTitle("Registro de Producto");
@@ -206,29 +221,21 @@ public class logic_Formulario implements ActionListener, KeyListener, WindowList
 			lb.txt_informacion.setVisible(false);
 			lb.btn_agregar.setVisible(false);
 			lb.btn_guardar.setText("Guardar");
+			
+			if (tm_producto != null) {
+				lb.txt_entrada1.setText(tm_producto.getname());
+				lb.txt_entrada2.setText(tm_producto.getDesc());
+				lb.txt_entrada3.setText(tm_producto.getCodigo());
+				lb.txt_entrada5.setText(String.valueOf(tm_producto.getprecio()));
+				lb.txt_entrada6.setText(String.valueOf(tm_producto.getstock()));
+				lb.cbx_entrada7.setSelectedItem(tm_producto.getproveedor());
+			}
 			break;
-		case VENTA:
-			lb.setTitle("Registro de Venta");
-			lb.lbl_titulo.setText("Registro de Venta");
-			lb.lbl_entrada1.setText("Codigo Producto");
-			lb.lbl_entrada2.setText("nombre");
-			lb.txt_entrada2.setEnabled(false);
-			lb.lbl_entrada3.setText("Cantidad");
-			lb.lbl_entrada4.setVisible(false);
-			lb.txt_entrada4.setVisible(false);
-			lb.lbl_entrada5.setVisible(false);
-			lb.txt_entrada5.setVisible(false);
-			lb.lbl_entrada6.setText("Cliente");
-			lb.txt_entrada6.setEnabled(false);
-			lb.lbl_entrada7.setText("Facturacion");
-			lb.cbx_entrada7.addItem("Consumidor Final");
-			lb.cbx_entrada7.addItem("Datos Facturacion");
-			lb.btn_agregar.setText("Agregar Producto");
-			lb.btn_guardar.setText("Finalizar Venta");
+		default:
 			break;
 		}
 	}
-
+	
 	private boolean validar() {
 		boolean validado = true;
 		switch (tipo) {
@@ -275,46 +282,10 @@ public class logic_Formulario implements ActionListener, KeyListener, WindowList
 		return validado;
 	}
 
-	public List<Proveedor> getProveedores() {
-		return proveedores;
-	}
-
-	public void setProveedores(List<Proveedor> proveedores) {
-		this.proveedores = proveedores;
-	}
-
-	public Cliente getUsuario() {
-		return tm_usuario;
-	}
-
-	public void setUsuario(Cliente tm_usuario) {
-		this.tm_usuario = tm_usuario;
-	}
-
-	public Proveedor getProveedor() {
-		return tm_proveedor;
-	}
-
-	public void setProveedor(Proveedor tm_proveedor) {
-		this.tm_proveedor = tm_proveedor;
-	}
-
-	public Producto getProducto() {
-		return tm_producto;
-	}
-
-	public void setProducto(Producto tm_producto) {
-		this.tm_producto = tm_producto;
-	}
-
-	public boolean isGuardado() {
-		return guardado;
-	}
-
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
-		guardado = false;
+
 	}
 
 	@Override
@@ -333,7 +304,6 @@ public class logic_Formulario implements ActionListener, KeyListener, WindowList
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if (e.getSource() == lb.btn_guardar) {
-			System.out.println("Guardar");
 			if (validar()) {
 				switch (tipo) {
 				case CLIENTE:
@@ -393,54 +363,4 @@ public class logic_Formulario implements ActionListener, KeyListener, WindowList
 			}
 		}
 	}
-
-	@Override
-	public void windowOpened(WindowEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void windowClosing(WindowEvent e) {
-		// TODO Auto-generated method stub
-		if (!guardado) {
-			guardado = confirmarSalida();
-			if (!guardado) {
-				lb.setDefaultCloseOperation(Formulario.DO_NOTHING_ON_CLOSE);
-			} else {
-				lb.setDefaultCloseOperation(Formulario.HIDE_ON_CLOSE);
-			}
-		}
-
-	}
-
-	@Override
-	public void windowClosed(WindowEvent e) {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void windowIconified(WindowEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void windowDeiconified(WindowEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void windowActivated(WindowEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void windowDeactivated(WindowEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
 }

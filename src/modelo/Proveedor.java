@@ -7,8 +7,13 @@ public class Proveedor {
     private String codigo;
     private String telefono;
     private String razonSocial;
+    
+    public Proveedor() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
-    // Constructor
+	// Constructor
     public Proveedor(String nombreCompleto, String email, String dni, String codigo, String telefono, String razonSocial) {
         this.nombreCompleto = nombreCompleto;
         this.email = email;
@@ -73,8 +78,20 @@ public class Proveedor {
 				nombreCompleto, email, dni);
 	}
     
-	public String information() {
+	public String toFile() {
 		return String.format("%s;%s;%s;%s;%s;%s",
 				nombreCompleto, email, dni, codigo, telefono, razonSocial);
+	}
+	
+	public boolean fromFile(String linea) {
+		String[] datos = linea.split(";");
+		if (datos.length != 6) return false;
+		setNombreCompleto(datos[0]);
+		setEmail(datos[1]);
+		setDni(datos[2]);
+		setCodigo(datos[3]);
+		setTelefono(datos[4]);
+		setRazonSocial(datos[5]);
+		return true;
 	}
 }

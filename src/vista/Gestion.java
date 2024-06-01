@@ -32,7 +32,7 @@ public class Gestion extends JFrame {
 			public void run() {
 				try {
 					Gestion frame = new Gestion();
-					//frame.setVisible(true);
+					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

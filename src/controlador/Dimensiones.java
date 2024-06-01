@@ -6,7 +6,7 @@ import java.awt.Toolkit;
 
 import javax.swing.JButton;
 
-import controlador.logic_Menu.VENTANA_TIPO;
+import controlador.SesionActual.VENTANA_TIPO;
 
 public interface Dimensiones {
 	

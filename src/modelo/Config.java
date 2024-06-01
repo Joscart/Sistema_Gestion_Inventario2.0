@@ -2,7 +2,7 @@ package modelo;
 
 import java.io.File;
 
-import controlador.logic_Menu.VENTANA_TIPO;
+import controlador.SesionActual.VENTANA_TIPO;
 
 public interface Config {
 	

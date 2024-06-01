@@ -23,6 +23,7 @@ public class LoginDAO implements Config, Codificador{
 	}
 	
 	public boolean agregarUsuario(Usuario u) throws IOException {
+		if(u == null) return false;
 		file.setFile(new File(RUTA_ESPECIFICA, ARCHIVO_LOGIN));
 		return file.writerFile(u.information(), false);
 	}

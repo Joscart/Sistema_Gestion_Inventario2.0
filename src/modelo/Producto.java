@@ -74,9 +74,22 @@ public class Producto {
 		return getname() + ", (" + getprecio() + "$) " + getstock() + " unidades";
 	}
 	
-	public String information() {
-        return String.format("%s;%s;%.2f;%d;%s", getname(), getDesc(), getprecio(), getstock(), getproveedor().information());
+	public String toFile() {
+        return String.format("%s;%s;%s;%.2f;%d;%s", getname(), getDesc(), getCodigo(), getprecio(), getstock(), getproveedor().toFile());
     }
 
-
-}
+	public boolean fromFile(String linea) {
+		String[] datos = linea.split(";");
+		if (datos.length != 11) return false;
+		setname(datos[0]);
+		setdesc(datos[1]);
+		setCodigo(datos[2]);
+		setprecio(Double.parseDouble(datos[3]));
+		setstock(Integer.parseInt(datos[4]));
+		Proveedor proveedor = new Proveedor();
+		if (!proveedor.fromFile(String.format("%s;%s;%s;%s;%s;%s",
+				datos[5], datos[6], datos[7], datos[8], datos[9], datos[10]))) return false;
+		setproveedor(proveedor);
+		return true;
+	}
+ }
