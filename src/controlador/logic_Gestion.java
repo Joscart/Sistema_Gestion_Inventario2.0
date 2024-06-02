@@ -222,13 +222,13 @@ public class logic_Gestion implements ActionListener, KeyListener, ListSelection
 			if(lb.lst_resultados.getSelectedValue() != null){
 			switch (tipo) {
 			case CLIENTE:
-				tm_usuario =  tm_datos.getClientes().get(lb.lst_resultados.getSelectedIndex());
+				tm_usuario =  tm_datos.getClientes().get(tm_datos.getClientes().indexOf(lb.lst_resultados.getSelectedValue()));
 				break;
 			case PROVEEDOR:
-				tm_proveedor = tm_datos.getProveedores().get(lb.lst_resultados.getSelectedIndex());
+				tm_proveedor = tm_datos.getProveedores().get(tm_datos.getProveedores().indexOf(lb.lst_resultados.getSelectedValue()));
 				break;
 			case PRODUCTO:
-				tm_producto = tm_datos.getProductos().get(lb.lst_resultados.getSelectedIndex());
+				tm_producto = tm_datos.getProductos().get(tm_datos.getProductos().indexOf(lb.lst_resultados.getSelectedValue()));
 				break;
 			default:
 				break;
@@ -269,7 +269,25 @@ public class logic_Gestion implements ActionListener, KeyListener, ListSelection
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if (e.getSource() == lb.btn_buscar) {
-
+			switch (tipo) {
+			case CLIENTE:
+				lb.lst_resultados.setListData(tm_datos.getClientes().stream()
+						.filter(c -> c.getNombre().toLowerCase().contains(lb.txt_busqueda.getText().toLowerCase()))
+						.toArray());
+				break;
+			case PROVEEDOR:
+				lb.lst_resultados.setListData(tm_datos.getProveedores().stream().filter(
+						p -> p.getNombreCompleto().toLowerCase().contains(lb.txt_busqueda.getText().toLowerCase()))
+						.toArray());
+				break;
+			case PRODUCTO:
+				lb.lst_resultados.setListData(tm_datos.getProductos().stream()
+						.filter(p -> p.getname().toLowerCase().contains(lb.txt_busqueda.getText().toLowerCase()))
+						.toArray());
+				break;
+			default:
+				break;
+			}
 		} else if (e.getSource() == lb.btn_editar) {
 			activo = true;
 			guardado = false;
