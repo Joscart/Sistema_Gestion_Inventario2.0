@@ -25,7 +25,6 @@ public class SesionActual implements Runnable, WindowListener, Dimensiones{
 
 	private DataAccess tm_datos = new DataAccess();
 	private Usuario tm_usuario;
-	private boolean activo = true;
 
 	protected Login lb_login;
 	protected Menu lb_menu;
@@ -200,9 +199,9 @@ public class SesionActual implements Runnable, WindowListener, Dimensiones{
 	public void windowClosed(WindowEvent e) {
 		// TODO Auto-generated method stub
 		if (e.getSource() == lb_login) {
-
 			if (tm_login.isValido()) {
 				iniciarMenu();
+				tm_menu.setPermisos(tm_usuario.getTipo());
 			}
 		}
 	}

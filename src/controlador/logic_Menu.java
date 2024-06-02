@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 
 import controlador.SesionActual.VENTANA_TIPO;
+import modelo.Usuario.TIPO_USUARIO;
 import vista.Menu;
 
 public class logic_Menu implements ActionListener, Dimensiones{
@@ -12,6 +13,8 @@ public class logic_Menu implements ActionListener, Dimensiones{
 	private Menu lb;
 	
 	VENTANA_TIPO tipo;
+	
+	TIPO_USUARIO permisos;
 	
 	public logic_Menu(Menu lb) {
 		this.lb = lb;
@@ -29,6 +32,29 @@ public class logic_Menu implements ActionListener, Dimensiones{
 	
 	public VENTANA_TIPO getTipo() {
 		return tipo;
+	}
+	
+	public TIPO_USUARIO getPermisos() {
+		return permisos;
+	}
+	
+	public void setPermisos(TIPO_USUARIO permisos) {
+		this.permisos = permisos;
+		
+		switch (permisos) {
+		case ADMINISTRADOR:
+			lb.btn_boton1.setEnabled(true);
+			lb.btn_boton2.setEnabled(true);
+			lb.btn_boton3.setEnabled(true);
+			lb.btn_boton4.setEnabled(true);
+			break;
+		case EMPLEADO:
+			lb.btn_boton1.setEnabled(false);
+			lb.btn_boton2.setEnabled(false);
+			lb.btn_boton3.setEnabled(true);
+			lb.btn_boton4.setEnabled(true);
+			break;
+		}
 	}
 
 	@Override
