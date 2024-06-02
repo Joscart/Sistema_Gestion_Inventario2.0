@@ -107,9 +107,17 @@ public class SesionActual implements Runnable, WindowListener, Dimensiones{
 			}
 		} else if (e.getSource() == lb_menu) {
 			if (lb_menu.getDefaultCloseOperation() == Menu.HIDE_ON_CLOSE) {
-				iniciarGestion();
-				tm_gestion.setDatos(tm_datos);
-				tm_gestion.setTipo(tm_menu.getTipo());
+				switch (tm_menu.getTipo()) {
+				case VENTA:
+					//ventana de venta
+					lb_menu.setDefaultCloseOperation(Menu.EXIT_ON_CLOSE);
+					break;
+				default:
+					iniciarGestion();
+					tm_gestion.setDatos(tm_datos);
+					tm_gestion.setTipo(tm_menu.getTipo());
+					break;
+				}
 			}
 		} else if (e.getSource() == lb_gestion) {
 			if (tm_gestion.isActivo()) {
