@@ -1,49 +1,37 @@
 package modelo;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.List;
 
-public class ValidarDatosProveedor {
+public class ValidarDatosProveedor implements Parametrizable{
 
-    // Método para validar el email
     public static boolean validarEmail(String email) {
-        String regex = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(email);
-        return matcher.matches();
+        return email.matches(ERCORREO);
     }
 
-    // Método para validar el DNI (ejemplo simple: longitud de 8 caracteres)
     public static boolean validarDni(String dni) {
-        return dni != null && dni.length() == 8 && dni.matches("\\d+");
+        return dni.matches(ERCEDULA);
     }
 
-    // Método para validar el código (puede incluir más reglas según el negocio)
-    public static boolean validarCodigo(String codigo) {
-        return codigo != null && !codigo.trim().isEmpty();
+    public static boolean validarCodigo(String codigo, List<Proveedor> proveedores) {
+    	
+    	for (Proveedor proveedor : proveedores) {	
+			if (proveedor.getCodigo().equals(codigo)) {
+				return false;
+			}
+    	}
+    	
+        return codigo.matches(ERCODIGO);
     }
 
-    // Método para validar el teléfono (ejemplo simple: longitud de 9-15 caracteres)
     public static boolean validarTelefono(String telefono) {
-        return telefono != null && telefono.length() >= 9 && telefono.length() <= 15 && telefono.matches("\\d+");
+        return telefono.matches(ERTELEFONO);
     }
 
-//    // Método para validar la razón social (ejemplo simple: no vacío)
-//    public static boolean validarRazonSocial(String razonSocial) {
-//        return razonSocial != null && !razonSocial.trim().isEmpty();
-//    }
-    
-    // Método para validar la razón social (persona física y persona moral)
     public static boolean validarRazonSocial(String razonSocial, boolean esPersonaFisica) {
-        if (razonSocial == null || razonSocial.trim().isEmpty()) {
-            return false;
-        }
         if (esPersonaFisica) {
-            // Para persona física, la razón social debe ser un solo nombre completo
-            return razonSocial.split("\\s+").length >= 2;
+            return razonSocial.matches(ERNOMBRES_COMPLETOS);
         } else {
-            // Para persona moral, la razón social debe tener al menos dos palabras
-            return razonSocial.split("\\s+").length >= 2;
+            return razonSocial.matches(ERRAZON_SOCIAL);
         }
     }
 }

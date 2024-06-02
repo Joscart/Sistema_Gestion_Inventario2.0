@@ -1,2 +1,4 @@
 
-Jose Guallasamin;Sangolqui;1728573153;0987955837;joscartinicioegc@gmail.com;1
+Ejemplo Cliente;Quito Ecuador;1142865412;0246855175;cliente@ejemplo.com;0
+Ejemplo Empleado;Quito Ecuador;0358945678;0578642485;empleado@ejemplo.com;1
+Ejemplo Administrador;Quito Ecuador;1554788657;0951473562;admin@ejemplo.com;2

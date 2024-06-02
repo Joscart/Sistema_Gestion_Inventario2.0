@@ -9,12 +9,13 @@ public class Producto {
 	String codigo;
 
 	public Producto() {
-		
+		super();
 		dt_prd = new Generica<>();
 		dte_prd = new Generica<>();
 	}
 	
 	public Producto(String name, String desc, String codigo, double precio, int stock, Proveedor proveedor) {
+		super();
 		dt_prd = new Generica<>(name, desc,precio );
 		dte_prd = new Generica<>(stock, proveedor);
 		this.codigo = codigo;
@@ -42,6 +43,7 @@ public class Producto {
 	public Proveedor getproveedor() {
 		return dte_prd.getAtributo3();
 	}
+	
 	public String getCodigo() {
 		return codigo;
 	}
@@ -60,13 +62,25 @@ public class Producto {
 	}
 	
 	public void setprecio(double precio_) {
+		if (precio_ < 0) precio_ = 0;
 		this.dt_prd.setAtributo3(precio_);
 	}
+	
 	public void setstock(int stock_) {
+		if (stock_ < 0) stock_ = 0;	
 		this.dte_prd.setAtributo1(stock_);
 	}
+	
 	public void setproveedor(Proveedor proveedor_) {
 		this.dte_prd.setAtributo3(proveedor_);
+	}
+	
+	public boolean vender(int cantidad) {
+		if (cantidad <= getstock()) {
+			setstock(getstock() - cantidad);
+			return true;
+		}
+		return false;
 	}
 
 	@Override

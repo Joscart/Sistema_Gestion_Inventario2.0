@@ -73,8 +73,18 @@ public class Usuario implements Codificador{
 		this.tipo = TIPO_USUARIO.valueOf(Codificador.decodificar(tipo));
 	}
 	
-	public String information() {
+	public String toFile() {
 		return Codificador.codificar(String.format("%s;%s;%s;%s", lb.getAtributo1(), lb.getAtributo2(), lb.getAtributo3().getTime(), Codificador.codificar(tipo.toString())));
+	}
+	
+	public boolean fromFile(String linea) {
+		String[] Datos = Codificador.decodificar(linea).split(";");
+		if(Datos.length != 4) return false;
+		lb.setAtributo1(Datos[0]);
+		lb.setAtributo2(Datos[1]);
+		lb.setAtributo3(new Date(Long.parseLong(Datos[2])));
+		tipo = TIPO_USUARIO.valueOf(Codificador.decodificar(Datos[3]));
+		return true;	
 	}
 	
 }

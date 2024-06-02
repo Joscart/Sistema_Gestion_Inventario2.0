@@ -23,9 +23,11 @@ import vista.Formulario;
 public class logic_Formulario implements ActionListener, KeyListener{
 
 	private Formulario lb;
-	private List<Proveedor> proveedores;
 	private boolean guardado = true;
 
+	private List<Producto> tm_productos;
+	private List<Proveedor> tm_proveedores;
+	
 	private Cliente tm_usuario;
 	private Proveedor tm_proveedor;
 	private Producto tm_producto;
@@ -52,8 +54,12 @@ public class logic_Formulario implements ActionListener, KeyListener{
 		return true;
 	}
 	
+	public void setProductos(List<Producto> productos) {
+		this.tm_productos = productos;
+	}
+	
 	public void setProveedores(List<Proveedor> proveedores) {
-		this.proveedores = proveedores;
+		this.tm_proveedores = proveedores;
 	}
 	
 	public void setCliente(Cliente cliente) {
@@ -213,8 +219,8 @@ public class logic_Formulario implements ActionListener, KeyListener{
 			lb.lbl_entrada6.setText("Existencias");
 			lb.lbl_entrada7.setText("Proveedor");
 			//rellenar proveedores
-			if (proveedores != null) {
-				for (Proveedor p : proveedores) {
+			if (tm_proveedores != null) {
+				for (Proveedor p : tm_proveedores) {
 					lb.cbx_entrada7.addItem(p);
 				}
 			}
@@ -259,7 +265,7 @@ public class logic_Formulario implements ActionListener, KeyListener{
 				validado = false;
 			if (!ValidarDatosProveedor.validarDni(lb.txt_entrada3.getText()))
 				validado = false;
-			if (!ValidarDatosProveedor.validarCodigo(lb.txt_entrada4.getText()))
+			if (!ValidarDatosProveedor.validarCodigo(lb.txt_entrada4.getText(), tm_proveedores))
 				validado = false;
 			if (!ValidarDatosProveedor.validarTelefono(lb.txt_entrada5.getText()))
 				validado = false;
@@ -269,7 +275,7 @@ public class logic_Formulario implements ActionListener, KeyListener{
 				validado = false;
 			if (!ValidarDatosProducto.validateDesc(lb.txt_entrada2.getText()))
 				validado = false;
-			if (!ValidarDatosProducto.validateCode(lb.txt_entrada3.getText()))
+			if (!ValidarDatosProducto.validateCode(lb.txt_entrada3.getText(), tm_productos))
 				validado = false;
 			if (!ValidarDatosProducto.validateprice(lb.txt_entrada5.getText()))
 				validado = false;

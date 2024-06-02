@@ -116,6 +116,7 @@ public class SesionActual implements Runnable, WindowListener, Dimensiones{
 				lb_gestion.setDefaultCloseOperation(Gestion.HIDE_ON_CLOSE);
 				iniciarFormulario();
 				lb_formulario.setBounds(dimensiones_formulario(tm_gestion.getTipo(), tm_gestion.getBotonActivo()));
+				tm_formulario.setProductos(tm_datos.getProductos());
 				tm_formulario.setProveedores(tm_datos.getProveedores());
 				tm_formulario.setCliente(tm_gestion.getCliente());
 				tm_formulario.setProducto(tm_gestion.getProducto());
@@ -137,12 +138,32 @@ public class SesionActual implements Runnable, WindowListener, Dimensiones{
 			} else if (tm_gestion.isGuardado()) {
 				lb_gestion.setDefaultCloseOperation(Gestion.DISPOSE_ON_CLOSE);
 				lb_menu.setDefaultCloseOperation(Menu.EXIT_ON_CLOSE);
+				if(tm_datos.getProveedores().isEmpty()) {
+					lb_menu.btn_boton3.setEnabled(false);
+				} else {
+					lb_menu.btn_boton3.setEnabled(true);
+				}
+				if (tm_datos.getProductos().isEmpty()) {
+					lb_menu.btn_boton4.setEnabled(false);
+				} else {
+					lb_menu.btn_boton4.setEnabled(true);
+				}
 				lb_menu.setVisible(true);
 			} else {
 				if (confirmarSalida(lb_gestion)) {
 					lb_gestion.setDefaultCloseOperation(Gestion.DISPOSE_ON_CLOSE);
 					tm_gestion.setGuardado(true);
 					lb_menu.setDefaultCloseOperation(Menu.EXIT_ON_CLOSE);
+					if(tm_datos.getProveedores().isEmpty()) {
+						lb_menu.btn_boton3.setEnabled(false);
+					} else {
+						lb_menu.btn_boton3.setEnabled(true);
+					}
+					if (tm_datos.getProductos().isEmpty()) {
+						lb_menu.btn_boton4.setEnabled(false);
+					} else {
+						lb_menu.btn_boton4.setEnabled(true);
+					}
 					lb_menu.setVisible(true);
 				} else {
 					lb_gestion.setDefaultCloseOperation(Gestion.DO_NOTHING_ON_CLOSE);
@@ -202,6 +223,16 @@ public class SesionActual implements Runnable, WindowListener, Dimensiones{
 			if (tm_login.isValido()) {
 				iniciarMenu();
 				tm_menu.setPermisos(tm_usuario.getTipo());
+				if(tm_datos.getProveedores().isEmpty()) {
+					lb_menu.btn_boton3.setEnabled(false);
+				} else {
+					lb_menu.btn_boton3.setEnabled(true);
+				}
+				if (tm_datos.getProductos().isEmpty()) {
+					lb_menu.btn_boton4.setEnabled(false);
+				} else {
+					lb_menu.btn_boton4.setEnabled(true);
+				}
 			}
 		}
 	}

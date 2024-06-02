@@ -96,6 +96,14 @@ public class DataAccess implements Runnable{
 	}
 
 	public boolean remove(Proveedor proveedor) {
+		if (proveedor == null) return false;
+		List<Producto> eliminar = new Vector<>();
+		for (Producto producto : tm_productos) {
+			if (proveedor.getCodigo().equals(producto.getproveedor().getCodigo())) {
+				eliminar.add(producto);
+			}
+		}
+		tm_productos.removeAll(eliminar);
 		return tm_proveedores.remove(proveedor);
 	}
 	

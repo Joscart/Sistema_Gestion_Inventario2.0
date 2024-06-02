@@ -1,2 +1,4 @@
 
-Telefono Xiaomi;Calidad presio;654321;620.00;10;Jose Esteban;asdad@si.com;12345678;123456;1234567896;cxvxv
+Ejemplo Producto;Ejemplo de producto;GGF556;15.00;5000;Ejemplo Proveedor;proveedor@ejemplo.com;1478554796;DFA457;4859564643;Proveedor S.A.
+Ejemplo Producto;Ejemplo de producto;KDF145;35.00;2000;Ejemplo Proveedor;proveedor@ejemplo.com;1478554796;DFA457;4859564643;Proveedor S.A.
+Ejemplo Producto;Ejemplo de producto;HTD124;64.00;3000;Ejemplo Proveedor;proveedor@ejemplo.com;1478554796;DFA457;4859564643;Proveedor S.A.

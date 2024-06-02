@@ -11,7 +11,7 @@ import java.util.Vector;
 import libreria.Files;
 import modelo.Usuario.TIPO_USUARIO;
 
-public class LoginDAO implements Config, Codificador{
+public class LoginDAO implements Config{
 	
 	private Files file;
 	private final String RUTA_ESPECIFICA = Config.getRutaEspecifica();
@@ -25,7 +25,7 @@ public class LoginDAO implements Config, Codificador{
 	public boolean agregarUsuario(Usuario u) throws IOException {
 		if(u == null) return false;
 		file.setFile(new File(RUTA_ESPECIFICA, ARCHIVO_LOGIN));
-		return file.writerFile(u.information(), false);
+		return file.writerFile(u.toFile(), false);
 	}
 	
 	public boolean modificarDB(List<? extends Usuario> list) throws IOException {
@@ -55,9 +55,8 @@ public class LoginDAO implements Config, Codificador{
 		String texto = file.readerFile();
 		for (String linea : texto.split("\n")) {
 			if(linea.isEmpty()) continue;
-			String[] datos = Codificador.decodificar(linea).split(";");
-			Usuario aux = new Usuario(Codificador.decodificar(datos[0]), Codificador.decodificar(datos[1]), Date.from(Instant.ofEpochMilli(Long.parseLong(datos[2]))));
-			aux.setTipo(datos[3]);
+			Usuario aux = new Usuario();
+			if(!aux.fromFile(linea)) continue;
 			list.add(aux);
 		}
 		return list;
