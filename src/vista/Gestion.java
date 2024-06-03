@@ -24,13 +24,15 @@ public class Gestion extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JButton btn_nuevo;
-	private JButton btn_eliminar;
-	private JTextField txt_busqueda;
-	private JButton btn_editar;
-	private JButton btn_guardar;
-	private JTextPane txt_informacion;
-	private JList lst_resultado;
+	public JButton btn_nuevo;
+	public JButton btn_eliminar;
+	public JTextField txt_busqueda;
+	public JButton btn_editar;
+	public JButton btn_guardar;
+	public JTextPane txt_informacion;
+	public JList lst_resultados;
+	public JLabel lbl_titulo;
+	public JButton btn_buscar;
 	
 	/**
 	 * Launch the application.
@@ -64,17 +66,17 @@ public class Gestion extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new MigLayout("", "[136.00px,grow][109.00,grow][85.00][][grow][-9.00]", "[58px][grow][grow,baseline][grow,baseline][grow][grow][grow][grow][grow][grow]"));
 		
-		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setForeground(Color.WHITE);
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 48));
-		contentPane.add(lblNewLabel, "cell 1 0 2 1,growx,aligny top");
+		lbl_titulo = new JLabel("New label");
+		lbl_titulo.setForeground(Color.WHITE);
+		lbl_titulo.setFont(new Font("Tahoma", Font.PLAIN, 48));
+		contentPane.add(lbl_titulo, "cell 1 0 2 1,growx,aligny top");
 		
 		txt_busqueda = new JTextField();
 		txt_busqueda.setBorder(null);
 		contentPane.add(txt_busqueda, "cell 0 1 2 1,growx");
 		txt_busqueda.setColumns(10);
 		
-		JButton btn_buscar = new JButton("Buscar");
+		btn_buscar = new JButton("Buscar");
 		btn_buscar.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btn_buscar.setBackground(new Color(138, 148, 213));
 		btn_buscar.setForeground(Color.WHITE);
@@ -83,9 +85,9 @@ public class Gestion extends JFrame {
 		txt_informacion = new JTextPane();
 		contentPane.add(txt_informacion, "cell 3 1 2 4,grow");
 		
-		lst_resultado = new JList();
-		lst_resultado.setBorder(UIManager.getBorder("Button.border"));
-		contentPane.add(lst_resultado, "flowx,cell 0 2 2 8,grow");
+		lst_resultados = new JList();
+		lst_resultados.setBorder(UIManager.getBorder("Button.border"));
+		contentPane.add(lst_resultados, "flowx,cell 0 2 2 8,grow");
 		
 		btn_nuevo = new JButton("Nuevo");
 		btn_nuevo.setFont(new Font("Tahoma", Font.PLAIN, 18));

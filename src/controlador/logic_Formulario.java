@@ -99,7 +99,6 @@ public class logic_Formulario implements ActionListener, KeyListener{
 		lb.lbl_estatus.setText("");
 		lb.btn_agregar.setText("");
 		lb.btn_guardar.setText("");
-		lb.txt_informacion.setText("");
 		lb.lbl_entrada1.setText("");
 		lb.lbl_entrada2.setText("");
 		lb.lbl_entrada3.setText("");
@@ -128,7 +127,6 @@ public class logic_Formulario implements ActionListener, KeyListener{
 		lb.txt_entrada5.setVisible(true);
 		lb.txt_entrada6.setVisible(true);
 		lb.cbx_entrada7.setVisible(true);
-		lb.txt_informacion.setVisible(true);
 		lb.lbl_estatus.setVisible(true);
 		lb.btn_agregar.setVisible(true);
 		lb.btn_guardar.setVisible(true);
@@ -139,7 +137,6 @@ public class logic_Formulario implements ActionListener, KeyListener{
 		lb.txt_entrada5.setEnabled(true);
 		lb.txt_entrada6.setEnabled(true);
 		lb.cbx_entrada7.setEnabled(true);
-		lb.txt_informacion.setEditable(false);
 	}
 
 	public void cargarFormulario() {
@@ -159,7 +156,6 @@ public class logic_Formulario implements ActionListener, KeyListener{
 			lb.cbx_entrada7.addItem("Cliente");
 			lb.cbx_entrada7.addItem("Empleado");
 			lb.cbx_entrada7.addItem("Administrador");
-			lb.txt_informacion.setVisible(false);
 			lb.btn_agregar.setVisible(false);
 			lb.btn_guardar.setText("Guardar");
 
@@ -189,7 +185,6 @@ public class logic_Formulario implements ActionListener, KeyListener{
 			lb.lbl_entrada6.setText("Razon Social");
 			lb.cbx_entrada7.addItem("Persona Fisica");
 			lb.cbx_entrada7.addItem("Persona Moral");
-			lb.txt_informacion.setVisible(false);
 			lb.btn_agregar.setVisible(false);
 			lb.btn_guardar.setText("Guardar");
 			
@@ -224,7 +219,6 @@ public class logic_Formulario implements ActionListener, KeyListener{
 					lb.cbx_entrada7.addItem(p);
 				}
 			}
-			lb.txt_informacion.setVisible(false);
 			lb.btn_agregar.setVisible(false);
 			lb.btn_guardar.setText("Guardar");
 			

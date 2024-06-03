@@ -136,6 +136,7 @@ public class logic_Gestion implements ActionListener, KeyListener, ListSelection
 		switch (tipo) {
 		case CLIENTE:
 			lb.setTitle("Usuarios");
+			lb.lbl_titulo.setText("Usuarios");
 			lb.btn_buscar.setText("Buscar Usuario");
 			lb.btn_editar.setText("Editar Usuario");
 			lb.btn_eliminar.setText("Eliminar Usuario");
@@ -145,6 +146,7 @@ public class logic_Gestion implements ActionListener, KeyListener, ListSelection
 			break;
 		case PROVEEDOR:
 			lb.setTitle("Proveedores");
+			lb.lbl_titulo.setText("Proveedores");
 			lb.btn_buscar.setText("Buscar Proveedor");
 			lb.btn_editar.setText("Editar Proveedor");
 			lb.btn_eliminar.setText("Eliminar Proveedor");
@@ -154,6 +156,7 @@ public class logic_Gestion implements ActionListener, KeyListener, ListSelection
 			break;
 		case PRODUCTO:
 			lb.setTitle("Productos");
+			lb.lbl_titulo.setText("Productos");
 			lb.btn_buscar.setText("Buscar Producto");
 			lb.btn_editar.setText("Editar Producto");
 			lb.btn_eliminar.setText("Eliminar Producto");

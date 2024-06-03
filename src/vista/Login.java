@@ -55,14 +55,14 @@ public class Login extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
 		
-		lbl_titulo = new JLabel("New label");
+		lbl_titulo = new JLabel("Inicio de Sesion");
 		contentPane.add(lbl_titulo);
 		
 		panel = new JPanel();
 		contentPane.add(panel);
 		panel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 		
-		lbl_usuario = new JLabel("New label");
+		lbl_usuario = new JLabel("Usuario");
 		panel.add(lbl_usuario);
 		
 		txt_usuario = new JTextField();
@@ -74,7 +74,7 @@ public class Login extends JFrame {
 		flowLayout_1.setAlignment(FlowLayout.LEFT);
 		contentPane.add(panel_1);
 		
-		lbl_contrasenia = new JLabel("New label");
+		lbl_contrasenia = new JLabel("Contraseña");
 		panel_1.add(lbl_contrasenia);
 		
 		txt_contrasenia = new JPasswordField();
@@ -86,7 +86,7 @@ public class Login extends JFrame {
 		flowLayout.setAlignment(FlowLayout.RIGHT);
 		contentPane.add(panel_2);
 		
-		btn_ingresar = new JButton("New button");
+		btn_ingresar = new JButton("Ingresar");
 		panel_2.add(btn_ingresar);
 	}
 	

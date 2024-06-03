@@ -13,7 +13,7 @@ import javax.swing.JSpinner;
 import java.awt.Font;
 import java.awt.Graphics;
 
-public class venta2 extends JFrame {
+public class Venta2 extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -25,7 +25,7 @@ public class venta2 extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					venta2 frame = new venta2();
+					Venta2 frame = new Venta2();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -37,7 +37,7 @@ public class venta2 extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public venta2() {
+	public Venta2() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 583, 319);
