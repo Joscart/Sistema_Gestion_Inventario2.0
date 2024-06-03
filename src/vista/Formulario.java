@@ -14,6 +14,12 @@ import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JTextArea;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Color;
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+
+import java.awt.BorderLayout;
 
 public class Formulario extends JFrame {
 
@@ -25,6 +31,7 @@ public class Formulario extends JFrame {
 	public JTextField txt_entrada4;
 	public JTextField txt_entrada5;
 	public JTextField txt_entrada6;
+	public JTextField txt_entrada7;
 	public JLabel lbl_entrada1;
 	public JLabel lbl_entrada2;
 	public JLabel lbl_entrada3;
@@ -37,7 +44,6 @@ public class Formulario extends JFrame {
 	public JLabel lbl_estatus;
 	public JButton btn_agregar;
 	public JButton btn_guardar;
-	public JLabel lbl_titulo;
 
 	/**
 	 * Launch the application.
@@ -59,79 +65,126 @@ public class Formulario extends JFrame {
 	 * Create the frame.
 	 */
 	public Formulario() {
+		setBackground(Color.WHITE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 541, 349);
 		contentPane = new JPanel();
+		contentPane.setForeground(Color.WHITE);
+		contentPane.setBackground(new Color(128, 0, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
-		contentPane.setLayout(new MigLayout("", "[57.00][172.00][grow][131.00,grow][65.00,grow]", "[][grow][grow][grow][grow][grow][grow][grow][grow][][grow][grow][grow]"));
+		contentPane.setLayout(new BorderLayout(0, 0));
 		
-		lbl_titulo = new JLabel("New label");
+		JPanel panelbase = new JPanel();
+		contentPane.add(panelbase);
+		panelbase.setLayout(new BoxLayout(panelbase, BoxLayout.X_AXIS));
+		
+		JPanel panel_1 = new JPanel();
+		panelbase.add(panel_1);
+		panel_1.setLayout(new BoxLayout(panel_1, BoxLayout.Y_AXIS));
+		
+		JPanel panel_2 = new JPanel();
+		panelbase.add(panel_2);
+		panel_2.setLayout(new BoxLayout(panel_2, BoxLayout.Y_AXIS));
+		
+		JPanel panel_3 = new JPanel();
+
+		panel_1.setForeground(Color.WHITE);
+		panel_1.setBackground(new Color(128, 0, 255));
+		panel_1.setBorder(new EmptyBorder(5, 5, 5, 5));
+		
+		panel_2.setForeground(Color.WHITE);
+		panel_2.setBackground(new Color(128, 0, 255));
+		panel_2.setBorder(new EmptyBorder(5, 5, 5, 5));
+		
+		panel_3.setForeground(Color.WHITE);
+		panel_3.setBackground(new Color(128, 0, 255));
+		panel_3.setBorder(new EmptyBorder(5, 5, 5, 5));
+		
+		JLabel lbl_titulo = new JLabel("New label");
+		lbl_titulo.setForeground(Color.WHITE);
 		lbl_titulo.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		contentPane.add(lbl_titulo, "cell 1 0");
+		panel_1.add(lbl_titulo);
 		
-		lbl_entrada1 = new JLabel("New label");
-		contentPane.add(lbl_entrada1, "flowx,cell 0 2,alignx leading");
+		JLabel lbl_entrada1 = new JLabel("New label");
+		lbl_entrada1.setForeground(Color.WHITE);
+		panel_1.add(lbl_entrada1);
 		
 		txt_entrada1 = new JTextField();
-		contentPane.add(txt_entrada1, "cell 1 2,growx");
+		panel_1.add(txt_entrada1);
 		txt_entrada1.setColumns(10);
 		
-		txt_informacion = new JTextArea();
-		contentPane.add(txt_informacion, "cell 3 2 2 7,grow");
+		JTextArea txt_informacion = new JTextArea();
+		panel_2.add(txt_informacion);
 		
-		lbl_entrada2 = new JLabel("New label");
-		contentPane.add(lbl_entrada2, "cell 0 3,alignx leading");
+		JLabel lbl_entrada2 = new JLabel("New label");
+		lbl_entrada2.setForeground(Color.WHITE);
+		panel_1.add(lbl_entrada2);
 		
 		txt_entrada2 = new JTextField();
-		contentPane.add(txt_entrada2, "cell 1 3,growx");
+		panel_1.add(txt_entrada2);
 		txt_entrada2.setColumns(10);
 		
-		lbl_entrada3 = new JLabel("New label");
-		contentPane.add(lbl_entrada3, "cell 0 4,alignx leading");
+		JLabel lbl_entrada3 = new JLabel("New label");
+		lbl_entrada3.setForeground(Color.WHITE);
+		panel_1.add(lbl_entrada3);
 		
 		txt_entrada3 = new JTextField();
-		contentPane.add(txt_entrada3, "cell 1 4,growx");
+		panel_1.add(txt_entrada3);
 		txt_entrada3.setColumns(10);
 		
-		lbl_entrada4 = new JLabel("New label");
-		contentPane.add(lbl_entrada4, "cell 0 5,alignx leading");
+		JLabel lbl_entrada4 = new JLabel("New label");
+		lbl_entrada4.setForeground(Color.WHITE);
+		panel_1.add(lbl_entrada4);
 		
 		txt_entrada4 = new JTextField();
-		contentPane.add(txt_entrada4, "cell 1 5,growx");
+		panel_1.add(txt_entrada4);
 		txt_entrada4.setColumns(10);
 		
-		lbl_entrada5 = new JLabel("New label");
-		contentPane.add(lbl_entrada5, "cell 0 6,alignx leading");
+		JLabel lbl_entrada5 = new JLabel("New label");
+		lbl_entrada5.setForeground(Color.WHITE);
+		panel_1.add(lbl_entrada5);
 		
 		txt_entrada5 = new JTextField();
-		contentPane.add(txt_entrada5, "cell 1 6,growx");
+		panel_1.add(txt_entrada5);
 		txt_entrada5.setColumns(10);
 		
-		lbl_entrada6 = new JLabel("New label");
-		contentPane.add(lbl_entrada6, "cell 0 7");
+		JLabel lbl_entrada6 = new JLabel("New label");
+		lbl_entrada6.setForeground(Color.WHITE);
+		panel_1.add(lbl_entrada6);
 		
 		txt_entrada6 = new JTextField();
-		contentPane.add(txt_entrada6, "cell 1 7,growx");
+		panel_1.add(txt_entrada6);
 		txt_entrada6.setColumns(10);
 		
-		lbl_entrada7 = new JLabel("New label");
-		contentPane.add(lbl_entrada7, "cell 0 8");
+		JLabel lbl_entrada7 = new JLabel("New label");
+		lbl_entrada7.setForeground(Color.WHITE);
+		panel_1.add(lbl_entrada7);
 		
-		lbl_estatus = new JLabel("New label");
-		contentPane.add(lbl_estatus, "cell 0 10,alignx leading");
+		JComboBox cbx_entrada7 = new JComboBox();
+		panel_1.add(cbx_entrada7);
 		
-		cbx_entrada7 = new JComboBox();
-		contentPane.add(cbx_entrada7, "cell 1 10,growx,aligny baseline");
+		JLabel lbl_estatus = new JLabel("New label");
+		lbl_estatus.setForeground(Color.WHITE);
+		panel_1.add(lbl_estatus);
 		
-		btn_agregar = new JButton("New button");
-		contentPane.add(btn_agregar, "cell 3 10,alignx leading");
+		JButton btn_agregar = new JButton("New button");
+		btn_agregar.setBackground(new Color(0, 102, 255));
+		btn_agregar.setForeground(Color.WHITE);
+		panel_3.add(btn_agregar);
 		
-		btn_guardar = new JButton("New button");
-		contentPane.add(btn_guardar, "cell 4 10,alignx trailing");
+		JButton btn_guardar = new JButton("New button");
+		btn_guardar.setBackground(new Color(0, 102, 255));
+		btn_guardar.setForeground(Color.WHITE);
+		panel_3.add(btn_guardar);
 		
-		
-		
+		panel_2.add(panel_3);
+	}
+	private ImageIcon imagen = new ImageIcon("src/imagen/morado.jpg");
+
+	public void paint(Graphics g) {
+		g.drawImage(imagen.getImage(), 0, 0, getWidth(), getHeight(), this);
+		contentPane.paintComponents(contentPane.getGraphics());
 	}
 }

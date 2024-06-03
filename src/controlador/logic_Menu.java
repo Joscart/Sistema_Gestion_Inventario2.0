@@ -8,7 +8,6 @@ import controlador.SesionActual.VENTANA_TIPO;
 import modelo.Usuario.TIPO_USUARIO;
 import vista.Menu;
 
-
 public class logic_Menu implements ActionListener, Dimensiones{
 	
 	private Menu lb;
@@ -17,10 +16,6 @@ public class logic_Menu implements ActionListener, Dimensiones{
 	
 	TIPO_USUARIO permisos;
 	
-	/**
-	 * Constructor de la clase.
-	 * @param lb Objeto de la clase Menu.
-	 */
 	public logic_Menu(Menu lb) {
 		this.lb = lb;
 		lb.setBounds(POS_X,POS_Y,ANCHO,ALTO);
@@ -35,26 +30,14 @@ public class logic_Menu implements ActionListener, Dimensiones{
 		lb.btn_salir.addActionListener(this);
 	}
 	
-	/**
-	 * Método para obtener el tipo de ventana.
-	 * @return Tipo de ventana.
-	 */
 	public VENTANA_TIPO getTipo() {
 		return tipo;
 	}
 	
-	/**
-	 * Método para obtener los permisos del usuario.
-	 * @return Permisos del usuario.
-	 */
 	public TIPO_USUARIO getPermisos() {
 		return permisos;
 	}
 	
-	/**
-	 * Método para establecer los permisos del usuario.
-	 * @param permisos Permisos del usuario.
-	 */
 	public void setPermisos(TIPO_USUARIO permisos) {
 		this.permisos = permisos;
 		

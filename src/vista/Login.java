@@ -89,5 +89,5 @@ public class Login extends JFrame {
 		btn_ingresar = new JButton("New button");
 		panel_2.add(btn_ingresar);
 	}
-
+	
 }
