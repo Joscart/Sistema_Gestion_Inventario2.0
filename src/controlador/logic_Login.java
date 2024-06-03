@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import vista.Login;
 import modelo.Usuario;
 
+
 public class logic_Login implements ActionListener, KeyListener, Dimensiones{
 
 	private Login lb;
@@ -20,6 +21,10 @@ public class logic_Login implements ActionListener, KeyListener, Dimensiones{
 
 	boolean valido = false;
 
+	/**
+	 * Constructor de la clase.
+	 * @param lb Objeto de la clase Login.
+	 */
 	public logic_Login(Login lb) {
 		this.lb = lb;
 		lb.setBounds(dimensiones_login());
@@ -32,18 +37,36 @@ public class logic_Login implements ActionListener, KeyListener, Dimensiones{
 		lb.btn_ingresar.addActionListener(this);
 	}	
 
+	/**
+	 * Método para verificar si el usuario ha sido validado.
+	 * @return true si el usuario ha sido validado, false de lo contrario.
+	 */
 	public boolean isValido() {
 		return valido;
 	}
 
+	/**
+	 * Método para obtener el usuario validado.
+	 * @return Objeto Usuario.
+	 */
 	public Usuario getUsuario() {
 		return tm_Usuario;
 	}
 
+	/**
+	 * Método para establecer la lista de usuarios.
+	 * @param listaUsuarios Lista de objetos Usuario.
+	 */
 	public void setUsuarios(List<Usuario> listaUsuarios) {
 		this.list_Usuarios = listaUsuarios;
 	}
 
+	/**
+	 * Método para validar las credenciales del usuario.
+	 * @param usuario Nombre de usuario.
+	 * @param contrasenia Contraseña del usuario.
+	 * @return true si las credenciales son válidas, false de lo contrario.
+	 */
 	public boolean validar(String usuario, char[] contrasenia) {
 		if (list_Usuarios != null) {
 			for (Usuario u : list_Usuarios) {

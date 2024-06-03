@@ -10,59 +10,82 @@ import controlador.SesionActual.VENTANA_TIPO;
 import libreria.Files;
 import modelo.Usuario.TIPO_USUARIO;
 
+
 public class ClienteDAO implements Config{
 	
-	private Files file;
-	private final String RUTA_ESPECIFICA = Config.getRutaEspecifica(VENTANA_TIPO.CLIENTE);
+    private Files file;
+    private final String RUTA_ESPECIFICA = Config.getRutaEspecifica(VENTANA_TIPO.CLIENTE);
 
-	public ClienteDAO() {
-		super();
-		// TODO Auto-generated constructor stub
-		file = new Files(RUTA_ABSOLUTA);
-	}
-	
-	public boolean agregarUsuario(Cliente c) throws IOException{
-		if(c == null) return false;
-		file.setFile(new File(RUTA_ESPECIFICA,ARCHIVO_USUARIO));
-		return file.writerFile(c.toFile(), false);
-	}
-	
-	public synchronized boolean modificarDB(List<? extends Cliente> list) throws IOException {	
-		file.setFile(new File(RUTA_ESPECIFICA,ARCHIVO_USUARIO));
-		file.writerFile("", true);
-		
-		boolean flag = true;
-		
-		for (Cliente c : list) {
-			try {
-				agregarUsuario(c);
-			} catch (IOException e) {
-				flag = false;
-				e.printStackTrace();
-			}
-		}
-		
-		return flag;
-	}
+    /**
+     * Constructor por defecto que inicializa el objeto Files con la ruta absoluta.
+     */
+    public ClienteDAO() {
+        super();
+        // TODO Auto-generated constructor stub
+        file = new Files(RUTA_ABSOLUTA);
+    }
 
-	public synchronized List<Cliente> leerDB() throws IOException {
-		file.setFile(new File(RUTA_ESPECIFICA, ARCHIVO_USUARIO));
-		file.create(1);
-		List<Cliente> list = new Vector<>();
-		String texto = file.readerFile();
-		for (String linea : texto.split("\n")) {
-			if(linea.isEmpty()) continue;
-			Cliente aux = new Cliente();
-			if(!aux.fromFile(linea)) {
-				aux = new Empleado();
-				if (!aux.fromFile(linea)) {
-					aux = new Administrador();
-					if (!aux.fromFile(linea)) continue;
-				}
-			}
-			list.add(aux);
-		}
-		return list;
-	}
+    /**
+     * Agrega un nuevo usuario de tipo Cliente al archivo.
+     *
+     * @param c El cliente a agregar.
+     * @return true si el cliente se agregó correctamente, false en caso contrario.
+     * @throws IOException Si ocurre un error de entrada/salida.
+     */
+    public boolean agregarUsuario(Cliente c) throws IOException{
+        if(c == null) return false;
+        file.setFile(new File(RUTA_ESPECIFICA, ARCHIVO_USUARIO));
+        return file.writerFile(c.toFile(), false);
+    }
 
+    /**
+     * Modifica la base de datos con una lista de clientes.
+     *
+     * @param list La lista de clientes a escribir en el archivo.
+     * @return true si la operación se realizó correctamente, false en caso contrario.
+     * @throws IOException Si ocurre un error de entrada/salida.
+     */
+    public synchronized boolean modificarDB(List<? extends Cliente> list) throws IOException {    
+        file.setFile(new File(RUTA_ESPECIFICA, ARCHIVO_USUARIO));
+        file.writerFile("", true);
+
+        boolean flag = true;
+
+        for (Cliente c : list) {
+            try {
+                agregarUsuario(c);
+            } catch (IOException e) {
+                flag = false;
+                e.printStackTrace();
+            }
+        }
+
+        return flag;
+    }
+
+    /**
+     * Lee la base de datos y retorna una lista de clientes.
+     *
+     * @return Una lista de objetos Cliente leídos del archivo.
+     * @throws IOException Si ocurre un error de entrada/salida.
+     */
+    public synchronized List<Cliente> leerDB() throws IOException {
+        file.setFile(new File(RUTA_ESPECIFICA, ARCHIVO_USUARIO));
+        file.create(1);
+        List<Cliente> list = new Vector<>();
+        String texto = file.readerFile();
+        for (String linea : texto.split("\n")) {
+            if(linea.isEmpty()) continue;
+            Cliente aux = new Cliente();
+            if(!aux.fromFile(linea)) {
+                aux = new Empleado();
+                if (!aux.fromFile(linea)) {
+                    aux = new Administrador();
+                    if (!aux.fromFile(linea)) continue;
+                }
+            }
+            list.add(aux);
+        }
+        return list;
+    }
 }

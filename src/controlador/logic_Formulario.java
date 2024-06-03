@@ -20,6 +20,7 @@ import modelo.ValidarDatosProducto;
 import modelo.ValidarDatosProveedor;
 import vista.Formulario;
 
+
 public class logic_Formulario implements ActionListener, KeyListener{
 
 	private Formulario lb;
@@ -34,66 +35,138 @@ public class logic_Formulario implements ActionListener, KeyListener{
 
 	private VENTANA_TIPO tipo;
 
+	/**
+	 * Constructor que inicializa el formulario y establece los listeners.
+	 *
+	 * @param lb el formulario a controlar
+	 */
 	public logic_Formulario(Formulario lb) {
 		this.lb = lb;
 		listener();
 	}
 
+	/**
+	 * Método que agrega los listeners a los botones del formulario.
+	 */
 	private void listener() {
 		lb.btn_guardar.addActionListener(this);
 	}
-	
+
+	/**
+	 * Devuelve el tipo de ventana actual.
+	 *
+	 * @return el tipo de ventana actual
+	 */
 	public VENTANA_TIPO getTipo() {
 		return tipo;
 	}
 
+	/**
+	 * Establece el tipo de ventana y carga el formulario correspondiente.
+	 *
+	 * @param tipo el tipo de ventana a establecer
+	 * @return true si el tipo de ventana se establece correctamente
+	 */
 	public boolean setTipo(VENTANA_TIPO tipo) {
 		this.tipo = tipo;
 		guardado = true;
 		cargarFormulario();
 		return true;
 	}
-	
+
+	/**
+	 * Establece la lista de productos.
+	 *
+	 * @param productos la lista de productos
+	 */
 	public void setProductos(List<Producto> productos) {
 		this.tm_productos = productos;
 	}
-	
+
+	/**
+	 * Establece la lista de proveedores.
+	 *
+	 * @param proveedores la lista de proveedores
+	 */
 	public void setProveedores(List<Proveedor> proveedores) {
 		this.tm_proveedores = proveedores;
 	}
-	
+
+	/**
+	 * Establece el cliente actual.
+	 *
+	 * @param cliente el cliente a establecer
+	 */
 	public void setCliente(Cliente cliente) {
 		this.tm_usuario = cliente;
 	}
-	
+
+	/**
+	 * Devuelve el cliente actual.
+	 *
+	 * @return el cliente actual
+	 */
 	public Cliente getCliente() {
 		return tm_usuario;
 	}
-	
+
+	/**
+	 * Establece el proveedor actual.
+	 *
+	 * @param proveedor el proveedor a establecer
+	 */
 	public void setProveedor(Proveedor proveedor) {
 		this.tm_proveedor = proveedor;
 	}
-	
+
+	/**
+	 * Devuelve el proveedor actual.
+	 *
+	 * @return el proveedor actual
+	 */
 	public Proveedor getProveedor() {
 		return tm_proveedor;
 	}
-	
+
+	/**
+	 * Establece el producto actual.
+	 *
+	 * @param producto el producto a establecer
+	 */
 	public void setProducto(Producto producto) {
 		this.tm_producto = producto;
 	}
-	
+
+	/**
+	 * Devuelve el producto actual.
+	 *
+	 * @return el producto actual
+	 */
 	public Producto getProducto() {
 		return tm_producto;
 	}
-	
+
+	/**
+	 * Establece si los datos han sido guardados.
+	 *
+	 * @param guardado true si los datos han sido guardados, false en caso contrario
+	 */
 	public void setGuardado(boolean guardado) {
 		this.guardado = guardado;
 	}
-	
+
+	/**
+	 * Devuelve si los datos han sido guardados.
+	 *
+	 * @return true si los datos han sido guardados, false en caso contrario
+	 */
 	public boolean isGuardado() {
 		return guardado;
 	}
 
+	/**
+	 * Resetea los campos del formulario.
+	 */
 	private void reset() {
 		lb.setTitle("");
 		lb.lbl_estatus.setText("");
@@ -142,6 +215,9 @@ public class logic_Formulario implements ActionListener, KeyListener{
 		lb.txt_informacion.setEditable(false);
 	}
 
+	/**
+	 * Carga el formulario correspondiente según el tipo de ventana.
+	 */
 	public void cargarFormulario() {
 		reset();
 		switch (tipo) {
@@ -218,7 +294,7 @@ public class logic_Formulario implements ActionListener, KeyListener{
 			lb.lbl_entrada5.setText("Precio");
 			lb.lbl_entrada6.setText("Existencias");
 			lb.lbl_entrada7.setText("Proveedor");
-			//rellenar proveedores
+			// Rellenar proveedores
 			if (tm_proveedores != null) {
 				for (Proveedor p : tm_proveedores) {
 					lb.cbx_entrada7.addItem(p);
@@ -241,46 +317,35 @@ public class logic_Formulario implements ActionListener, KeyListener{
 			break;
 		}
 	}
-	
+
+	/**
+	 * Valida los datos ingresados en el formulario según el tipo de ventana.
+	 *
+	 * @return true si los datos son válidos, false en caso contrario
+	 */
 	private boolean validar() {
 		boolean validado = true;
 		switch (tipo) {
 		case CLIENTE:
-			if(!ValidarDatosCliente.validarNombre(lb.txt_entrada1.getText()))
-				validado = false;
-			if(!ValidarDatosCliente.validarDireccion(lb.txt_entrada2.getText()))
-				validado = false;
-			if(!ValidarDatosCliente.validarDNI(lb.txt_entrada3.getText()))
-				validado = false;
-			if(!ValidarDatosCliente.ValidarTelefono(lb.txt_entrada4.getText()))
-				validado = false;
-			if(!ValidarDatosCliente.ValidarEmail(lb.txt_entrada5.getText()))
-				validado = false;
+			if (!ValidarDatosCliente.validarNombre(lb.txt_entrada1.getText())) validado = false;
+			if (!ValidarDatosCliente.validarDireccion(lb.txt_entrada2.getText())) validado = false;
+			if (!ValidarDatosCliente.validarDNI(lb.txt_entrada3.getText())) validado = false;
+			if (!ValidarDatosCliente.ValidarTelefono(lb.txt_entrada4.getText())) validado = false;
+			if (!ValidarDatosCliente.ValidarEmail(lb.txt_entrada5.getText())) validado = false;
 			break;
 		case PROVEEDOR:
-			if (!ValidarDatosProveedor.validarRazonSocial(lb.txt_entrada1.getText(),
-					lb.cbx_entrada7.getSelectedIndex() == 0))
-				validado = false;
-			if (!ValidarDatosProveedor.validarEmail(lb.txt_entrada2.getText()))
-				validado = false;
-			if (!ValidarDatosProveedor.validarDni(lb.txt_entrada3.getText()))
-				validado = false;
-			if (!ValidarDatosProveedor.validarCodigo(lb.txt_entrada4.getText(), tm_proveedores))
-				validado = false;
-			if (!ValidarDatosProveedor.validarTelefono(lb.txt_entrada5.getText()))
-				validado = false;
+			if (!ValidarDatosProveedor.validarRazonSocial(lb.txt_entrada1.getText(), lb.cbx_entrada7.getSelectedIndex() == 0)) validado = false;
+			if (!ValidarDatosProveedor.validarEmail(lb.txt_entrada2.getText())) validado = false;
+			if (!ValidarDatosProveedor.validarDni(lb.txt_entrada3.getText())) validado = false;
+			if (!ValidarDatosProveedor.validarCodigo(lb.txt_entrada4.getText(), tm_proveedores)) validado = false;
+			if (!ValidarDatosProveedor.validarTelefono(lb.txt_entrada5.getText())) validado = false;
 			break;
 		case PRODUCTO:
-			if (!ValidarDatosProducto.validateNames(lb.txt_entrada1.getText()))
-				validado = false;
-			if (!ValidarDatosProducto.validateDesc(lb.txt_entrada2.getText()))
-				validado = false;
-			if (!ValidarDatosProducto.validateCode(lb.txt_entrada3.getText(), tm_productos))
-				validado = false;
-			if (!ValidarDatosProducto.validateprice(lb.txt_entrada5.getText()))
-				validado = false;
-			if (!ValidarDatosProducto.validatestock(lb.txt_entrada6.getText()))
-				validado = false;
+			if (!ValidarDatosProducto.validateNames(lb.txt_entrada1.getText())) validado = false;
+			if (!ValidarDatosProducto.validateDesc(lb.txt_entrada2.getText())) validado = false;
+			if (!ValidarDatosProducto.validateCode(lb.txt_entrada3.getText(), tm_productos)) validado = false;
+			if (!ValidarDatosProducto.validateprice(lb.txt_entrada5.getText())) validado = false;
+			if (!ValidarDatosProducto.validatestock(lb.txt_entrada6.getText())) validado = false;
 			break;
 		default:
 			break;
@@ -290,45 +355,35 @@ public class logic_Formulario implements ActionListener, KeyListener{
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-
+		// No implementado
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
-
+		// No implementado
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-
+		// No implementado
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
 		if (e.getSource() == lb.btn_guardar) {
 			if (validar()) {
 				switch (tipo) {
 				case CLIENTE:
-
 					if (lb.cbx_entrada7.getSelectedIndex() == 0) {
-
 						tm_usuario = new Cliente(lb.txt_entrada1.getText(), lb.txt_entrada2.getText(),
 								lb.txt_entrada3.getText(), lb.txt_entrada4.getText(), lb.txt_entrada5.getText());
-
 					} else if (lb.cbx_entrada7.getSelectedIndex() == 1) {
-
 						tm_usuario = new Empleado(lb.txt_entrada1.getText(), lb.txt_entrada2.getText(),
 								lb.txt_entrada3.getText(), lb.txt_entrada4.getText(), lb.txt_entrada5.getText());
-
 					} else {
 						tm_usuario = new Administrador(lb.txt_entrada1.getText(), lb.txt_entrada2.getText(),
 								lb.txt_entrada3.getText(), lb.txt_entrada4.getText(), lb.txt_entrada5.getText());
 					}
-
 					break;
 				case PROVEEDOR:
 					if (tm_proveedor == null) {
@@ -358,6 +413,7 @@ public class logic_Formulario implements ActionListener, KeyListener{
 					}
 					break;
 				case VENTA:
+					// Manejar la lógica de venta si es necesario
 					break;
 				}
 				guardado = true;
